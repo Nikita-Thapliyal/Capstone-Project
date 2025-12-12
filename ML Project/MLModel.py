@@ -100,20 +100,3 @@ plt.title("Top 10 Important Features Influencing Mental Health Treatment")
 plt.xlabel("Feature Importance Score")
 plt.ylabel("Features")
 plt.show()
-
-from xgboost import XGBClassifier
-
-xgb = XGBClassifier(
-    n_estimators=300,
-    learning_rate=0.05,
-    max_depth=6,
-    subsample=0.8,
-    colsample_bytree=0.8,
-    eval_metric='auc',
-    random_state=42
-)
-xgb.fit(X_train, y_train)
-y_pred_proba = xgb.predict_proba(X_test)[:,1]
-
-from sklearn.metrics import roc_auc_score
-print("XGBoost AUC:", roc_auc_score(y_test, y_pred_proba))
